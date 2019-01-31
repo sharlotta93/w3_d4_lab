@@ -1,5 +1,6 @@
 require('pg')
 require_relative('casting.rb')
+require_relative('movie.rb')
 require_relative('../db/sql_runner.rb')
 
 
@@ -11,6 +12,17 @@ class Star
   def initialize(person)
     @name = person['name']
     @id = person['id'] if person['id']
+  end
+
+  def movies()
+    sql = "SELECT movies.*
+          FROM movies
+          INNER JOIN castings
+          ON castings.movie_id = movies.id
+          WHERE castings.star_id = $1"
+    values = [@id]
+    movies = SqlRunner.run(sql, values)
+    return movies.map { |movie| Movie.new(movie)}
   end
 
   def save()

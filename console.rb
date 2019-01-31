@@ -3,6 +3,7 @@ require_relative('models/movie.rb')
 require_relative('models/star.rb')
 require_relative('models/casting.rb')
 
+# Casting.delete_all()
 # Star.delete_all()
 # Movie.delete_all()
 
@@ -31,9 +32,35 @@ movie_2 = Movie.new( {
   }
 )
 
+
 movie_1.save()
 movie_2.save()
 
+
+casting_1 = Casting.new( {
+  'star_id' => star_1.id,
+  'movie_id' => movie_2.id,
+  'fee' => 3000
+  }
+)
+
+casting_2 = Casting.new( {
+  'star_id' => star_2.id,
+  'movie_id' => movie_1.id,
+  'fee' => 6000
+  }
+)
+
+casting_3 = Casting.new( {
+  'star_id' => star_1.id,
+  'movie_id' => movie_1.id,
+  'fee' => 4000
+  }
+)
+
+casting_1.save()
+casting_2.save()
+casting_3.save()
 
 binding.pry
 nil
