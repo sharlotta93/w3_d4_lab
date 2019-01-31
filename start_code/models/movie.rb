@@ -1,3 +1,7 @@
+require('pg')
+require_relative('models/casting')
+require_relative('../db/sql_runner.rb')
+
 class Movie
 
   attr_accessor :title, :genre
@@ -8,5 +12,5 @@ class Movie
     @genre = movie['genre']
     @id = movie['id'] if movie['id']
   end
-  
+
 end

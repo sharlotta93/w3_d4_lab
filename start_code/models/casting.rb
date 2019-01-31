@@ -1,3 +1,8 @@
+require('pg')
+require_relative('models/movie.rb')
+require_relative('models/star.rb')
+require_relative('../db/sql_runner.rb')
+
 class Casting
 
   attr_reader :id
