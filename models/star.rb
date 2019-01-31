@@ -1,6 +1,6 @@
 require('pg')
 require_relative('casting.rb')
-require_relative('db/sql_runner.rb')
+require_relative('../db/sql_runner.rb')
 
 
 class Star
@@ -14,7 +14,7 @@ class Star
   end
 
   def save()
-    sql = "INSERT INTO stars name VALUES $1 RETURNING id"
+    sql = "INSERT INTO stars (name) VALUES ($1) RETURNING id"
     values = [@name]
     star = SqlRunner.run(sql,values)
     @id = star[0]['id'].to_i
@@ -37,10 +37,10 @@ class Star
     SqlRunner.run(sql)
   end
 
-  # def self.all()
-  #   sql = "SELECT * FROM stars"
-  #   result = SqlRunner.run(sql).first
-  #   return result.map{ |star| Star.new(star)}
-  # end
+  def self.all()
+    sql = "SELECT * FROM stars"
+    result = SqlRunner.run(sql).first
+    return result.map{ |star| Star.new(star)}
+end
 
 end
